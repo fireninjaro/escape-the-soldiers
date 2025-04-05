@@ -1,10 +1,37 @@
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    controller.moveSprite(mySprite, 100, 100)
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    controller.moveSprite(mySprite, 100, 100)
+})
 info.onCountdownEnd(function () {
     game.gameOver(true)
 })
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    controller.moveSprite(mySprite, 100, 100)
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    controller.moveSprite(mySprite, 100, 100)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    animation.runMovementAnimation(
+    mySprite3,
+    animation.animationPresets(animation.parachuteLeft),
+    2000,
+    false
+    )
+    animation.runMovementAnimation(
+    mySprite2,
+    animation.animationPresets(animation.parachuteRight),
+    2000,
+    false
+    )
     info.changeLifeBy(-1)
 })
-let mySprite = sprites.create(img`
+let mySprite2: Sprite = null
+let mySprite3: Sprite = null
+let mySprite: Sprite = null
+mySprite = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
     . . . . . . b b b b b b . . . . 
@@ -22,7 +49,7 @@ let mySprite = sprites.create(img`
     b b c c c d d d d 5 5 5 b b . . 
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
-let mySprite3 = sprites.create(img`
+mySprite3 = sprites.create(img`
     ....ffffff..............
     ..ffeeeef2f.............
     .ffeeeef222f............
@@ -48,7 +75,7 @@ let mySprite3 = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.Enemy)
-let mySprite2 = sprites.create(img`
+mySprite2 = sprites.create(img`
     ....ffffff..............
     ..ffeeeef2f.............
     .ffeeeef222f............
@@ -84,3 +111,4 @@ mySprite3.setBounceOnWall(true)
 mySprite2.setBounceOnWall(true)
 info.setLife(15)
 info.startCountdown(300)
+mySprite.setStayInScreen(true)
